@@ -5,6 +5,7 @@ const state = {
 const taskContents = document.querySelector(".task__contents");
 const taskModal = document.querySelector(".task__modal__body");
 
+
 // HTML Code for my task 
 const htmlTaskContent = ({ id, title, description, type, url }) =>
 
@@ -84,20 +85,29 @@ const updateLocalStorage = () => {
             tasks: state.taskList,
         })
     );
+
 };
 
 // This function checks and shows previous data  if any
 const loadInitialData = () => {
     const localStorageCopy = JSON.parse(localStorage.tasks);
+
+
     if (localStorageCopy) state.taskList = localStorageCopy.tasks;
+
 
     state.taskList.map((cardDate) => {
         taskContents.insertAdjacentHTML("beforeend", htmlTaskContent(cardDate));
+
     });
 };
 
 // This function collects our tasks data and shows my tasks
 const handleSubmit = (event) => {
+
+    const noTask = document.getElementById("no__task");
+    noTask.remove();
+
     const id = `${Date.now()}`;
     const input = {
         url: document.getElementById("imageUrl").value,

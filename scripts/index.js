@@ -29,7 +29,7 @@ const htmlTaskContent = ({ id, title, description, type, url }) =>
             ${url
         ? `<img  width='100%' height='200px' style="object-fit: cover; object-position: center"  src=${url} alt='card image cap' class='card-image-top md-3 rounded-lg' />`
         : `
-            <img   style="object-fit: cover; object-position: center ;height: 185px; width:100%; " src="../images/defult task image.png" alt='card image cap' class='img-fluid place__holder__image mb-3' />
+            <img   width='100%' height='185px' style="object-fit: cover; object-position: center ; " src="../images/defult task image.png" alt='card image cap' class='img-fluid place__holder__image mb-3' />
             
             `
     }
@@ -68,7 +68,7 @@ const htmlModalContent = ({ id, title, description, url }) => {
               <img width='100%' src=${url} alt='card image cap' class='img-fluid place__holder__image mb-3' />
             `
             : `
-            <img   style="object-fit: cover; object-position: center; width : 100%  " src="../images/defult task image.png" alt='card image cap' class='img-fluid place__holder__image mb-3' />
+            <img width='100%' style="object-fit: cover; object-position: center;  " src="../images/defult task image.png" alt='card image cap' class='img-fluid place__holder__image mb-3' />
             `
         }
         <strong class = 'text-sm text-muted' > Created on ${date.toDateString()} </strong>

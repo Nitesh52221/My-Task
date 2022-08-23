@@ -3,6 +3,7 @@ const state = {
 };
 
 const taskContents = document.querySelector(".task__contents");
+
 const taskModal = document.querySelector(".task__modal__body");
 
 
@@ -14,21 +15,21 @@ const htmlTaskContent = ({ id, title, description, type, url }) =>
    
         <div class = 'card shadow-sm task__card'>
             <div class = 'card-header d-flex gap-2 justify-content-end task__card__header'>
-              <button type = 'button' class = 'btn btn-outline-info mr-2' name = ${id} onclick = "editTask.apply(this,arguments)">
+              <button type = 'button' class = 'btn btn-outline-info mr-2 my__task__card__edit__button' name = ${id} onclick = "editTask.apply(this,arguments)">
                     <i class = 'fas fa-pencil-alt' name = ${id}></i>
               </button>
-              <button type = 'button' class = 'btn btn-outline-danger mr-2' name = ${id} onclick = "deleteTask.apply(this,arguments)">
+              <button type = 'button' class = 'btn btn-outline-danger mr-2 my__task__card__delete__button' name = ${id} onclick = "deleteTask.apply(this,arguments)">
                     <i class = 'fas fa-trash-alt' name = ${id}></i>
               </button>
 
             </div>
 
-            <div class = 'card-body'>
+            <div class = 'card-body my__task__card__body'>
 
             ${url
-        ? `<img  width='100%' height='150px' style="object-fit: cover; object-position: center"  src=${url} alt='card image cap' class='card-image-top md-3 rounded-lg' />`
+        ? `<img  width='100%' height='200px' style="object-fit: cover; object-position: center"  src=${url} alt='card image cap' class='card-image-top md-3 rounded-lg' />`
         : `
-            <img   style="object-fit: cover; object-position: center ;height: 138px; width:100%; " src="https://www.guardanthealthamea.com/wp-content/uploads/2019/09/no-image.jpg" alt='card image cap' class='img-fluid place__holder__image mb-3' />
+            <img   style="object-fit: cover; object-position: center ;height: 185px; width:100%; " src="../images/defult task image.png" alt='card image cap' class='img-fluid place__holder__image mb-3' />
             
             `
     }
@@ -37,14 +38,14 @@ const htmlTaskContent = ({ id, title, description, type, url }) =>
                 <p calss = 'description trim-3-lines text-muted' data-gram_editor = 'false' > ${description} </p>
 
                 <div class = 'tags text-white d-flex flex-wrap' >
-                    <span class ='badge bg-primary m-1' > ${type} </span>
+                    <span class ='badge bg-primary m-1 my__task__card__type' > ${type} </span>
                 </div>
             </div>
             
             <div class = 'card-footer'>
                 <button 
                     type = 'button' 
-                    class = 'btn btn-outline-primary float-right' 
+                    class = 'btn btn-outline-primary float-right my__task__card__open__btn' 
                     data-bs-toggle = 'modal'
                     data-bs-target = '#showTask'
                     onclick = 'openTask.apply(this , arguments)'
@@ -67,7 +68,7 @@ const htmlModalContent = ({ id, title, description, url }) => {
               <img width='100%' src=${url} alt='card image cap' class='img-fluid place__holder__image mb-3' />
             `
             : `
-            <img height: '150px'; width:'100%';  style="object-fit: cover; object-position: center  " src="https://www.guardanthealthamea.com/wp-content/uploads/2019/09/no-image.jpg" alt='card image cap' class='img-fluid place__holder__image mb-3' />
+            <img   style="object-fit: cover; object-position: center; width : 100%  " src="../images/defult task image.png" alt='card image cap' class='img-fluid place__holder__image mb-3' />
             `
         }
         <strong class = 'text-sm text-muted' > Created on ${date.toDateString()} </strong>
@@ -85,11 +86,11 @@ const updateLocalStorage = () => {
             tasks: state.taskList,
         })
     );
-
 };
 
 // This function checks and shows previous data  if any
 const loadInitialData = () => {
+
     const localStorageCopy = JSON.parse(localStorage.tasks);
 
 
@@ -97,6 +98,7 @@ const loadInitialData = () => {
 
 
     state.taskList.map((cardDate) => {
+        console.log(cardDate)
         taskContents.insertAdjacentHTML("beforeend", htmlTaskContent(cardDate));
 
     });
@@ -105,8 +107,7 @@ const loadInitialData = () => {
 // This function collects our tasks data and shows my tasks
 const handleSubmit = (event) => {
 
-    const noTask = document.getElementById("no__task");
-    noTask.remove();
+
 
     const id = `${Date.now()}`;
     const input = {
@@ -130,6 +131,7 @@ const handleSubmit = (event) => {
 
     state.taskList.push({ ...input, id });
     updateLocalStorage();
+
 };
 
 // This function open my task in details
@@ -183,7 +185,8 @@ const editTask = (e) => {
     taskType = parentNode.childNodes[3].childNodes[7].childNodes[1];
     submitButton = parentNode.childNodes[5].childNodes[1];
 
-    taskTitle.setAttribute("contenteditable", "true");
+    taskTitle.setAttribute("contenteditable", "true",);
+
     taskDescription.setAttribute("contenteditable", "true");
     taskType.setAttribute("contenteditable", "true");
 
@@ -249,10 +252,10 @@ const searchTask = (e) => {
     const resultData = state.taskList.filter(({ title }) => {
         return title.toLowerCase().includes(e.target.value.toLowerCase());
     });
-
-
     resultData.map((cardData) => {
         taskContents.insertAdjacentHTML("beforeend", htmlTaskContent(cardData))
     })
+}
 
-};
+
+

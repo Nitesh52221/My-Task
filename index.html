@@ -37,14 +37,15 @@
   <!-- body starts -->
   <body onload="loadInitialData()">
     <!-- add task button for small screen -->
-    <div class="add__new__btn__mobile__only d-md-none">
+
+    <div class="pb-3 pe-3 d-md-none bottom__add__new__btn__div">
       <button
-        class="btn btn-dark btn-primary d-flex align-items-center gap-3"
+        class="btn mt-4 rounded-circle bottom__add__new__btn"
         type="submit"
         data-bs-toggle="modal"
         data-bs-target="#addNewModal"
       >
-        <i class="fas fa-plus"></i> Add New Task
+        <i class="fas fa-plus"></i>
       </button>
     </div>
 
@@ -79,6 +80,10 @@
                   placeholder="https://example.com/image.png"
                 />
               </div>
+              <!-- <div class="mb-3">
+                <label for="imageUrl" class="form-label">Browse File</label>
+                <input class="form-control" type="file" id="imageUrl" />
+              </div> -->
               <div class="mb-3">
                 <label for="taskTitle" class="form-label">Task Tital</label>
                 <input
@@ -208,7 +213,7 @@
     <!-- Navbar code Ends -->
 
     <!-- Container Starts -->
-    <div class="container">
+    <div class="container h-75">
       <!-- search section starts -->
       <section class="mt-4">
         <div class="row justify-content-center">
@@ -236,20 +241,12 @@
       <!-- My Tasks Section Starts  -->
       <section class="mt-4">
         <h3>Your Tasks</h3>
-        <div class="row task__contents">
-          <div
-            class="d-flex justify-content-center align-items-center"
-            id="no__task"
-          >
-            <!-- <p class="text-muted fs-1">
-              You have no Created Tasks. Click On Add New Task
-            </p> -->
-          </div>
-        </div>
+        <div class="row task__contents"></div>
       </section>
       <!-- My Tasks Section Ends -->
     </div>
     <!-- Container Ends -->
+    <!-- add task button for small screen -->
 
     <script src="./scripts/index.js"></script>
     <script

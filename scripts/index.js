@@ -14,7 +14,7 @@ const htmlTaskContent = ({ id, title, description, type, url }) =>
     <div class = 'col-md-6 col-lg-4 mt-3' id = ${id} key = ${id} >
    
         <div class = 'card shadow-sm task__card'>
-            <div class = 'card-header d-flex gap-2 justify-content-end task__card__header'>
+            <div class = 'card-header d-flex gap-2 justify-content-end task__card__header' id = 'my__task__header'>
               <button type = 'button' class = 'btn btn-outline-info mr-2 my__task__card__edit__button' name = ${id} onclick = "editTask.apply(this,arguments)">
                     <i class = 'fas fa-pencil-alt' name = ${id}></i>
               </button>
@@ -98,7 +98,7 @@ const loadInitialData = () => {
 
 
     state.taskList.map((cardDate) => {
-        console.log(cardDate)
+        // console.log(cardDate)
         taskContents.insertAdjacentHTML("beforeend", htmlTaskContent(cardDate));
 
     });
@@ -110,12 +110,14 @@ const handleSubmit = (event) => {
 
 
     const id = `${Date.now()}`;
+
     const input = {
         url: document.getElementById("imageUrl").value,
         title: document.getElementById("taskTitle").value,
         description: document.getElementById("taskDescription").value,
         type: document.getElementById("tags").value,
     };
+    console.log(input.url);
 
     if (input.title === "" || input.description === "" || input.type === "") {
         return alert("please fill all fields");
@@ -168,6 +170,7 @@ const editTask = (e) => {
     const targetID = e.target.id;
     const type = e.target.tagName;
 
+
     let parentNode;
     let taskTitle;
     let taskDescription;
@@ -176,9 +179,12 @@ const editTask = (e) => {
 
     if (type === "BUTTON") {
         parentNode = e.target.parentNode.parentNode;
+
     } else {
         parentNode = e.target.parentNode.parentNode.parentNode;
     }
+
+
 
     taskTitle = parentNode.childNodes[3].childNodes[3];
     taskDescription = parentNode.childNodes[3].childNodes[5];
@@ -199,6 +205,10 @@ const editTask = (e) => {
 // this function saves my changes in my tasks 
 const saveEdit = (e) => {
     if (!e) e = window.event;
+
+    var element = document.getElementById("element-id");
+    element.parentNode.removeChild(element);
+
 
     const targetID = e.target.id;
     const parentNode = e.target.parentNode.parentNode;

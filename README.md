@@ -11,7 +11,7 @@ https://todomytasks.netlify.app/
 
 ## Demo 
 
-![Employee data](/repository/assets/employee.png?raw=true "Employee Data title")
+![Demo image](/repository/?raw=true "Demo")
 
 
 
